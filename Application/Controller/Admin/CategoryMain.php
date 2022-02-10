@@ -37,33 +37,47 @@ class CategoryMain extends CategoryMain_parent
     public function save()
     {
         parent::save();
-
         $config = $this->getConfig();
-        $file = $config->getUploadedFile("myfile");
         $aMediaFile = $config->getUploadedFile("mediaFile");
 
-        if (is_array($file['name']) && reset($file['name']) || $aMediaFile['name']) {
+        return $this->saveProcess($aMediaFile);
+    }
+
+    /**
+     * Validate media data before saving.
+     *
+     */
+    protected function validate($sMediaDesc, $sMediaUrl, $aMediaFile)
+    {
+        if (!$sMediaDesc) {
+            return Registry::getUtilsView()->addErrorToDisplay('EXCEPTION_NODESCRIPTIONADDED');
+        }
+
+        if ((!$sMediaUrl || $sMediaUrl == 'http://') && !$aMediaFile['name']) {
+            return Registry::getUtilsView()->addErrorToDisplay('EXCEPTION_NOMEDIAADDED');
+        }
+
+        if ($aMediaFile['name']) {
             $config = $this->getConfig();
             if ($config->isDemoShop()) {
                 $oEx = oxNew(ExceptionToDisplay::class);
                 $oEx->setMessage('ARTICLE_EXTEND_UPLOADISDISABLED');
                 Registry::getUtilsView()->addErrorToDisplay($oEx, false);
-
-                return null;
             }
         }
 
+        return null;
+    }
+
+    protected function saveProcess($aMediaFile)
+    {
         $soxId = $this->getEditObjectId();
         $sMediaUrl = $this->getConfig()->getRequestParameter("mediaUrl");
         $sMediaDesc = $this->getConfig()->getRequestParameter("mediaDesc");
 
         if (($sMediaUrl && $sMediaUrl != 'http://') || $aMediaFile['name'] || $sMediaDesc) {
-            if (!$sMediaDesc) {
-                return Registry::getUtilsView()->addErrorToDisplay('EXCEPTION_NODESCRIPTIONADDED');
-            }
-
-            if ((!$sMediaUrl || $sMediaUrl == 'http://') && !$aMediaFile['name']) {
-                return Registry::getUtilsView()->addErrorToDisplay('EXCEPTION_NOMEDIAADDED');
+            if ($validator = $this->validate($sMediaDesc, $sMediaUrl, $aMediaFile)) {
+                return $validator;
             }
 
             $oMediaUrl = oxNew(MediaUrl::class);
@@ -72,20 +86,22 @@ class CategoryMain extends CategoryMain_parent
 
             if ($aMediaFile['name']) {
                 try {
-                    $sMediaUrl = Registry::getUtilsFile()->processFile('mediaFile','out/media/');
-                    $oMediaUrl->oxmediaurls__oxisuploaded = new Field(1,Field::T_RAW);
+                    $sMediaUrl = Registry::getUtilsFile()->processFile('mediaFile', 'out/media/');
+                    $oMediaUrl->oxmediaurls__oxisuploaded = new Field(1, Field::T_RAW);
                 } catch (Exception $e) {
                     return Registry::getUtilsView()->addErrorToDisplay($e->getMessage());
                 }
             }
 
             $oMediaUrl->oxmediaurls__oxobjectid = new Field($soxId, Field::T_RAW);
-            $oMediaUrl->oxmediaurls__oxurl = new Field($sMediaUrl,Field::T_RAW);
-            $oMediaUrl->oxmediaurls__oxdesc = new Field($sMediaDesc,Field::T_RAW);
+            $oMediaUrl->oxmediaurls__oxurl = new Field($sMediaUrl, Field::T_RAW);
+            $oMediaUrl->oxmediaurls__oxdesc = new Field($sMediaDesc, Field::T_RAW);
             $oMediaUrl->save();
         }
 
-        return $this->setEditObjectId($soxId);
+        $this->setEditObjectId($soxId);
+
+        return null;
     }
 
     public function updateMedia()
