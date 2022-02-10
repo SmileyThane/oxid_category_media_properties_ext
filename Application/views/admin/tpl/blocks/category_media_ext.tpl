@@ -1,8 +1,6 @@
 [{$smarty.block.parent}]
 <tr>
     <td class="edittext" colspan="2">
-    </td>
-    <td class="edittext" colspan="2">
         <br/>
         <fieldset title="[{oxmultilang ident="CATEGORY_MEDIA_PROPERTIES_MEDIAURLS"}]" style="padding-left: 5px;">
             <legend>[{oxmultilang ident="CATEGORY_MEDIA_PROPERTIES_MEDIAURLS"}]</legend>
@@ -17,8 +15,9 @@
                     [{else}]
                     [{assign var=oddclass value="2"}]
                     [{/if}]
-                    <td class=listitem[{$oddclass}]>
-                        &nbsp;<a href="[{$oMediaUrl->getLink()}]" target="_blank"> >> </a>&nbsp;
+                    <td  style="min-width: 450px;"  class=listitem[{$oddclass}]>
+                        &nbsp;<a href="[{$oMediaUrl->getLink()}]" target="_blank">
+                            [{$oMediaUrl->oxmediaurls__oxdesc->value}] </a>&nbsp;
                     </td>
                     <td class=listitem[{$oddclass}]>
                         <a
@@ -28,32 +27,26 @@
                             <img src="[{$oViewConf->getImageUrl()}]/delete_button.gif" border=0>
                         </a>&nbsp;
                     </td>
-                    <td class="listitem[{$oddclass}]" width=250>
-                        <input style="width:100%" class="edittext" type="text"
-                               name="aMediaUrls[[{$oMediaUrl->oxmediaurls__oxid->value}]][oxmediaurls__oxdesc]"
-                               value="[{$oMediaUrl->oxmediaurls__oxdesc->value}]" [{$readonly}]>
-                    </td>
                 </tr>
                 [{/foreach}]
+            </table>
+        </fieldset>
+        <fieldset style="padding-left: 5px;">
+            <legend>[{oxmultilang ident="CATEGORY_MEDIA_PROPERTIES_UPDATEMEDIA"}]</legend>
+            <br>
 
-                [{if $aMediaUrls->count()}]
-                <tr>
-                    <td colspan="3" align="right">
-                        <input class="edittext" type="button"
-                               onclick="this.form.fnc.value='updateMedia';this.form.submit();" [{$readonly}]
-                               value="[{oxmultilang ident="CATEGORY_MEDIA_PROPERTIES_UPDATEMEDIA"}]" [{$readonly}]>
-                        <br><br>
-                    </td>
-                </tr>
-                [{/if}]
-
+            <table>
                 <tr>
                     <td colspan="3">
                         [{oxmultilang ident="CATEGORY_MEDIA_PROPERTIES_DESCRIPTION"}]:<br>
                         <input style="width:100%" type="text" name="mediaDesc" class="edittext" [{$readonly}]>
                     </td>
                 </tr>
-
+                <tr>
+                    <td colspan="3">
+                        <br/>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="3">
                         [{oxmultilang ident="CATEGORY_MEDIA_PROPERTIES_ENTERURL"}]:<br>
