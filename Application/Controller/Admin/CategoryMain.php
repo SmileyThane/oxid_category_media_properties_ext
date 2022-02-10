@@ -8,10 +8,23 @@ use OxidEsales\Eshop\Core\Exception\ExceptionToDisplay;
 use OxidEsales\Eshop\Core\Field;
 use OxidEsales\Eshop\Core\Registry;
 
+/**
+ * Class CategoryMain
+ *
+ * Child class of global CategoryMain class
+ *
+ */
 class CategoryMain extends CategoryMain_parent
 {
+    /** @const NEW_CATEGORY_ID */
     const NEW_CATEGORY_ID = "-1";
 
+    /**
+     * Loads category parameters and passes them to Smarty engine, returns
+     * name of template file "category_main.tpl".
+     *
+     * @return string
+     */
     public function render()
     {
         parent::render();
@@ -34,6 +47,10 @@ class CategoryMain extends CategoryMain_parent
         return "category_main.tpl";
     }
 
+    /**
+     * Saves changed configuration parameters.
+     *
+     */
     public function save()
     {
         parent::save();
@@ -104,6 +121,9 @@ class CategoryMain extends CategoryMain_parent
         return null;
     }
 
+    /**
+     * Updates existing media descriptions
+     */
     public function updateMedia()
     {
         $aMediaUrls = $this->getConfig()->getRequestParameter('aMediaUrls');
@@ -119,6 +139,9 @@ class CategoryMain extends CategoryMain_parent
         }
     }
 
+    /**
+     * Deletes media url (with possible linked files)
+     */
     public function deleteMedia()
     {
         $objectId = $this->getEditObjectId();
