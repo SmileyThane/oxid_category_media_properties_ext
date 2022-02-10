@@ -1,6 +1,6 @@
 <?php
 
-namespace SmileyThane\CategoryExtendModule\Application\Controller\Admin;
+namespace SmileyThane\CategoryMediaPropertiesExt\Application\Controller\Admin;
 
 use OxidEsales\Eshop\Application\Model\Category;
 use OxidEsales\Eshop\Application\Model\MediaUrl;

@@ -1,6 +1,6 @@
 <?php
 
-namespace SmileyThane\CategoryExtendModule\Application\Model;
+namespace SmileyThane\CategoryMediaPropertiesExt\Application\Model;
 
 use OxidEsales\Eshop\Core\Model\ListModel;
 

@@ -24,7 +24,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "SmileyThane\\CategoryExtendModule\\": "../../../source/modules/SmileyThane/oxid-category-media-properties-ext"
+      "SmileyThane\\CategoryMediaPropertiesExt\\": "../../../source/modules/SmileyThane/oxid-category-media-properties-ext"
     }
   }
 }

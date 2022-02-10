@@ -17,8 +17,8 @@ $aModule = [
     'url' => 'http://www.oxid-esales.com/en/',
     'email' => 'thane.crios@gmail.com',
     'extend' => [
-        OxidEsales\Eshop\Application\Model\Category::class => \SmileyThane\CategoryExtendModule\Application\Model\Category::class,
-        OxidEsales\Eshop\Application\Controller\Admin\CategoryMain::class => \SmileyThane\CategoryExtendModule\Application\Controller\Admin\CategoryMain::class,
+        OxidEsales\Eshop\Application\Model\Category::class => \SmileyThane\CategoryMediaPropertiesExt\Application\Model\Category::class,
+        OxidEsales\Eshop\Application\Controller\Admin\CategoryMain::class => \SmileyThane\CategoryMediaPropertiesExt\Application\Controller\Admin\CategoryMain::class,
     ],
     'blocks' => [
         [
