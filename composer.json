@@ -1,0 +1,29 @@
+{
+  "name": "smileythane/oxid_category_media_properties_ext",
+  "description": "OXID eShop extension for adding media in categories.",
+  "type": "oxideshop-module",
+  "keywords": ["OXID", "eShop"],
+  "license": [
+    "MIT"
+  ],
+  "require": {
+    "php": ">=7.4",
+    "oxid-esales/oxideshop-ce": "^v6.3"
+  },
+  "extra": {
+    "oxideshop": {
+      "target-directory": "SmileyThane/oxid-category-media-properties-ext"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/SmileyThane/oxid-category-media-properties-ext.git"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SmileyThane\\CategoryExtendModule\\": "../../../source/modules/SmileyThane/oxid-category-media-properties-ext"
+    }
+  }
+}
