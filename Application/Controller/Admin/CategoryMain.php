@@ -105,9 +105,9 @@ class CategoryMain extends CategoryMain_parent
 
     public function deleteMedia()
     {
-        $soxId = $this->getEditObjectId();
+        $objectId = $this->getEditObjectId();
         $sMediaId = $this->getConfig()->getRequestParameter("mediaid");
-        if ($sMediaId && $soxId) {
+        if ($sMediaId && $objectId) {
             $oMediaUrl = oxNew(MediaUrl::class);
             $oMediaUrl->load($sMediaId);
             $oMediaUrl->delete();

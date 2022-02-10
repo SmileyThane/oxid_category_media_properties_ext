@@ -16,10 +16,12 @@ class Category extends Category_parent
             $this->_aMediaUrls->getBaseObject()->setLanguage($this->getLanguage());
 
             $sViewName = getViewName("oxmediaurls", $this->getLanguage());
-            $sQ = "select * from {$sViewName} where oxobjectid = :oxobjectid";
-            $this->_aMediaUrls->selectString($sQ, [
-                ':oxobjectid' => $this->getId()
-            ]);
+            $this->_aMediaUrls->selectString(
+                "select * from {$sViewName} where oxobjectid = :oxobjectid",
+                [
+                    ':oxobjectid' => $this->getId()
+                ]
+            );
         }
 
         return $this->_aMediaUrls;
