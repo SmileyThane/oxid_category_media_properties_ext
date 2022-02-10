@@ -4,10 +4,21 @@ namespace SmileyThane\CategoryMediaPropertiesExt\Application\Model;
 
 use OxidEsales\Eshop\Core\Model\ListModel;
 
+/**
+ * Category model.
+ * Collects category information (articles, etc.)
+ *
+ */
 class Category extends Category_parent
 {
+    /** @var $_aMediaUrls */
     protected $_aMediaUrls = null;
 
+    /**
+     * Return category media URL
+     *
+     * @return array
+     */
     public function getMediaUrls()
     {
         if ($this->_aMediaUrls === null) {
