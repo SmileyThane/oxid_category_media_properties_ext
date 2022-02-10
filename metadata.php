@@ -1,6 +1,6 @@
 <?php
 
-$sMetadataVersion = '2.0';
+$sMetadataVersion = '2.1';
 
 $aModule = [
     'id' => 'category_media_properties_ext',
